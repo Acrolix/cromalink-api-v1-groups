@@ -1,0 +1,23 @@
+services:
+  api:
+    container_name: cromalink-api-groups
+    hostname: cromalink-api-groups
+    image: cromalink-api-groups
+    networks:
+      cromalink:
+        ipv4_address: 172.18.0.14
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    ports:
+      - "8003:80"
+    volumes:
+      - ./:/var/www/html
+
+networks:
+  cromalink:
+    external: true
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+          ip_range: 172.18.0.0/20

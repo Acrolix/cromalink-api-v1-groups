@@ -40,6 +40,7 @@ class AuthToken
 
             return response()->json(['message' => 'Token inválido'], 401);
         } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
             return response()->json(['message' => 'Error al validar el token'], 500);
         }
     }

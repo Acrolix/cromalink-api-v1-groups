@@ -1,0 +1,29 @@
+services:
+  api:
+    container_name: cromalink-api-groups
+    hostname: cromalink-api-groups
+    image: cromalink-api-groups
+    networks:
+      cromalink:
+        ipv4_address: 172.18.0.14
+    build:
+      context: .
+    env_file:
+      - .env
+    environment:
+      - APP_NAME='Cromalink API Groups'
+      - DB_HOST=cromalink_db
+      - DB_DATABASE=cromalink_db
+      - DB_USERNAME=cromalink_groups
+      - DB_PASSWORD=password_groups
+      - DB_PORT=3306
+      - APP_DEBUG=false
+      - AUTH_API_URL=cromalink-api-auth/api/oauth
+
+networks:
+  cromalink:
+    external: true
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+          ip_range: 172.18.0.0/20
